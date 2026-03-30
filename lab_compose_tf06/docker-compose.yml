@@ -1,0 +1,19 @@
+services:
+  web:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: tf06-nginx
+    ports:
+      - "8000:80"
+    depends_on:
+      - cache
+
+  cache:
+    image: redis:alpine
+    container_name: tf06-redis
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
